@@ -15,8 +15,6 @@ int main() {
     sf::Clock deltaClock;
     while (window.isOpen())
     {
-        float deltaTime = deltaClock.restart().asSeconds();
-
         // Event Polling
         while (const std::optional event = window.pollEvent())
         {
@@ -28,7 +26,7 @@ int main() {
         }
 
         // Update
-        ImGui::SFML::Update(window, deltaTime);
+        ImGui::SFML::Update(window, deltaClock.restart());
         // ImGui::ShowDemoWindow();
 
         // Render
