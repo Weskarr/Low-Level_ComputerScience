@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <iostream> // For Debugging
+
 int main() {
     sf::RenderWindow window;
     window.create(sf::VideoMode({ 1280, 720 }), "My window");
@@ -27,7 +29,7 @@ int main() {
 
         // Update
         ImGui::SFML::Update(window, deltaClock.restart());
-        // ImGui::ShowDemoWindow();
+        ImGui::ShowDemoWindow();
 
         // Render
         window.clear();
