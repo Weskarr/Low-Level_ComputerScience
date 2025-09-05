@@ -4,17 +4,9 @@
 
 #include <iostream> // For Debugging
 
-
-//
-// Not using this one, use this one instead:
-// -> "\SFML-ImGui_StartPoint\Assignments\0_StartingPoint\SourceFiles\main.cpp"
-//
-
-
-/*
-int main() 
+int main()
 {
-    std::cout << "Main (Source Files)" << std::endl;
+    std::cout << "Initializing: Main (StartingPoint)" << std::endl;
 
     sf::RenderWindow window;
     window.create(sf::VideoMode({ 1280, 720 }), "My window");
@@ -39,7 +31,7 @@ int main()
 
         // Update
         ImGui::SFML::Update(window, deltaClock.restart());
-        ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
 
         // Render
         window.clear();
@@ -49,6 +41,5 @@ int main()
         window.display();
     }
 
-	return 0;
+    return 0;
 }
-*/
