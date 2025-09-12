@@ -4,8 +4,13 @@
 
 #include <iostream> // For Debugging.
 
+#include "../HeaderFiles/AssignmentHeaderPaths.h"
+
 int main()
 {
+    // Unique pointer to the current assignment.
+    std::unique_ptr<Assignment> currentAssignment = nullptr;
+
     // Console Initialization.
     std::cout << "Initializing: Main (0_StartingPoint)" << std::endl;
 
@@ -25,7 +30,7 @@ int main()
     // Main Loop.
     while (window.isOpen())
     {
-        // Event Polling.
+        // Event polling.
         while (const std::optional event = window.pollEvent())
         {
             ImGui::SFML::ProcessEvent(window, *event);
@@ -38,14 +43,59 @@ int main()
         // Update ImGui state.
         ImGui::SFML::Update(window, deltaClock.restart());
 
-        // Show ImGui Demo.
-        //ImGui::ShowDemoWindow();
+        // Main menu initialization.
+        ImGui::Begin("Main Menu");
 
-        // Render everything.
+        // Assignment choosing or running?
+        if (!currentAssignment) 
+        {
+            // Assignment is yet to be chosen, await decision.
+            ImGui::Text("Choose an assignment to run:");
+
+            // Add assignments buttons.
+            if (ImGui::Button("0. Playground Assignment"))
+            {
+                // Set new current.
+                // -> Is for small scale experiments!
+                currentAssignment = std::make_unique<PlaygroundAssignment>();
+                std::cout << "CurrentAssignment is TestAssignment" << std::endl;
+            }
+            if (ImGui::Button("0. Demo Assignment")) 
+            {
+                // Set new current.
+                // -> Is for playing around with the ImGui demo!
+                currentAssignment = std::make_unique<DemoAssignment>();
+                std::cout << "CurrentAssignment is DemoAssignment" << std::endl;
+            }
+        }
+        else 
+        {
+            // Assignment is running and updating.
+            currentAssignment->Update();
+
+            // Add a back button.
+            if (ImGui::Button("Return")) 
+            {
+                // delete assignment, go back automatically.
+                currentAssignment.reset(); 
+                std::cout << "CurrentAssignment is Null" << std::endl;
+            }
+        }
+
+        // End main menu or crazy error.
+        ImGui::End();
+
+        // Render everything, etc.
         window.clear();
+        if (currentAssignment)
+            currentAssignment->Render(window);
         ImGui::SFML::Render(window);
         window.display();
     }
 
+    // Recommended for clean-up?
+    ImGui::SFML::Shutdown();
+
+    // Quit
     return 0;
 }
