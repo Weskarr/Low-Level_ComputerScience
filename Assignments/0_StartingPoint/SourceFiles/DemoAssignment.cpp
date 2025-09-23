@@ -7,6 +7,11 @@
 
 #include "../HeaderFiles/DemoAssignment.h"
 
+void DemoAssignment::Start()
+{
+    // ...
+}
+
 void DemoAssignment::Update() 
 {
     // Run ImGui Demo.

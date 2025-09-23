@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream> // For Debugging.
+#include <chrono> // For Profilling-ish.
 
 #include "../HeaderFiles/AssignmentHeaderPaths.h"
 
@@ -59,6 +60,7 @@ int main()
                 // -> Is for small scale experiments!
                 currentAssignment = std::make_unique<PlaygroundAssignment>();
                 std::cout << "CurrentAssignment is TestAssignment" << std::endl;
+                currentAssignment->Start();
             }
             if (ImGui::Button("0. Demo Assignment")) 
             {
@@ -66,6 +68,15 @@ int main()
                 // -> Is for playing around with the ImGui demo!
                 currentAssignment = std::make_unique<DemoAssignment>();
                 std::cout << "CurrentAssignment is DemoAssignment" << std::endl;
+                currentAssignment->Start();
+            }
+            if (ImGui::Button("0. ExploringAlgoFunc Assignment"))
+            {
+                // Set new current.
+                // -> Is for playing around with the ImGui demo!
+                currentAssignment = std::make_unique<ExploringAlgoFuncAssignment>();
+                std::cout << "CurrentAssignment is ExploringAlgoFunc" << std::endl;
+                currentAssignment->Start();
             }
         }
         else 

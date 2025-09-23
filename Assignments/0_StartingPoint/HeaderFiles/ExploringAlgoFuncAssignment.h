@@ -3,7 +3,7 @@
 
 #include "Assignment.h"
 
-class DemoAssignment : public Assignment
+class ExploringAlgoFuncAssignment : public Assignment
 {
 public:
     void Start() override;
