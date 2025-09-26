@@ -70,12 +70,48 @@ int main()
                 std::cout << "CurrentAssignment is DemoAssignment" << std::endl;
                 currentAssignment->Start();
             }
-            if (ImGui::Button("0. ExploringAlgoFunc Assignment"))
+            if (ImGui::Button("0. Exploring Algo/Funcs Assignment"))
             {
                 // Set new current.
-                // -> Is for playing around with the ImGui demo!
+                // -> Is for learning algorithms!
                 currentAssignment = std::make_unique<ExploringAlgoFuncAssignment>();
-                std::cout << "CurrentAssignment is ExploringAlgoFunc" << std::endl;
+                std::cout << "CurrentAssignment is ExploringAlgoFuncAssignment" << std::endl;
+                currentAssignment->Start();
+            }
+
+
+
+
+            if (ImGui::Button("1. Chat Client Assignment"))
+            {
+                // Set new current.
+                // -> Is for learning networking via a chat client.
+                currentAssignment = std::make_unique<ChatClientAssignment>();
+                std::cout << "CurrentAssignment is ChatClientAssignment" << std::endl;
+                currentAssignment->Start();
+            }
+            if (ImGui::Button("2. Collision Crisis Assignment"))
+            {
+                // Set new current.
+                // -> Is for learning physics optimizations via collisions.
+                currentAssignment = std::make_unique<CollisionCrisisAssignment>();
+                std::cout << "CurrentAssignment is CollisionCrisisAssignment" << std::endl;
+                currentAssignment->Start();
+            }
+            if (ImGui::Button("3. Memory & Cache Optimization Assignment"))
+            {
+                // Set new current.
+                // -> Is for learning general memory and cache optimizations.
+                currentAssignment = std::make_unique<MemoryAndCacheOptiAssignment>();
+                std::cout << "CurrentAssignment is MemoryAndCacheOptiAssignment" << std::endl;
+                currentAssignment->Start();
+            }
+            if (ImGui::Button("4. Game Of Life Assignment"))
+            {
+                // Set new current.
+                // -> Is for learning simulation programming and algorithms & collection classes.
+                currentAssignment = std::make_unique<GameOfLifeAssignment>();
+                std::cout << "CurrentAssignment is GameOfLifeAssignment" << std::endl;
                 currentAssignment->Start();
             }
         }
