@@ -5,12 +5,23 @@
 #include "../../0_Extras/HeaderFiles/Assignment.h"
 
 #include "FPSCounter.h"
-#include "World.h"
+
+#include "CellData.h"
+#include "WorldData.h"
+#include "WorldGenerator.h"
 
 #include "Rules/ConwayRules.h"
 #include "Rules/HighLifeRules.h"
 #include "Rules/PedestrianLife.h"
 #include "Rules/DayNight.h"
+
+#include "Offsets/MooreOffsets.h"
+#include "Offsets/VonNeumannOffsets.h"
+#include "Offsets/NinjaStarOffsets.h"
+#include "Offsets/SpacedStarOffsets.h"
+#include "Offsets/SpacedSquareOffsets.h"
+#include "Offsets/LargeSquareOffsets.h"
+#include "Offsets/RoundedLargeSquareOffsets.h"
 
 class GameOfLifeAssignment : public Assignment
 {
@@ -19,11 +30,15 @@ public:
     void Start() override;
     void Update() override;
     void Render(sf::RenderWindow& window) override;
+
 private:
-    World currentWorld = World(new ConwayRules);
+    int resolution = 4;
+    //WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 75, new ConwayRules, new MooreOffsets);
+	WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 60, new HighLifeRules, new SpacedStarOffsets);
+    //WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 80, new DayNight, new NinjaStarOffsets);
+	WorldGenerator worldGenerator;
+
     FrameCounter<> fpsCounter;
     std::chrono::system_clock::time_point lastReportTime;
     sf::RectangleShape cell;
-
-    std::vector<bool> cellCondition;
 };

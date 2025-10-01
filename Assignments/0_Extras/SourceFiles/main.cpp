@@ -17,7 +17,7 @@ int main()
 
     // Create SFML window.
     sf::RenderWindow window;
-    window.create(sf::VideoMode({ 1280, 720 }), "My window");
+    window.create(sf::VideoMode({ 960, 540 }), "My window");
     window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(true);
 
