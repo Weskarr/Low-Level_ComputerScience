@@ -32,10 +32,9 @@ public:
     void Render(sf::RenderWindow& window) override;
 
 private:
-    int resolution = 4;
-    //WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 75, new ConwayRules, new MooreOffsets);
-	WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 60, new HighLifeRules, new SpacedStarOffsets);
-    //WorldData currentWorld = WorldData(960 / resolution, 540 / resolution, 1 * resolution, 80, new DayNight, new NinjaStarOffsets);
+    WorldData currentWorld = WorldData(100, 100, 5, 75, new ConwayRules, new MooreOffsets);
+	//WorldData currentWorld = WorldData(500, 500, 1, 60, new HighLifeRules, new SpacedStarOffsets);
+    //WorldData currentWorld = WorldData(500, 500, 1, 80, new DayNight, new NinjaStarOffsets);
 	WorldGenerator worldGenerator;
 
     FrameCounter<> fpsCounter;

@@ -63,7 +63,7 @@ void GameOfLifeAssignment::Render(sf::RenderWindow& window)
         int y = index / width;
 
         this->cell.setPosition(sf::Vector2f(float(x * size), float(y * size)));
-        this->cell.setFillColor(cellData.GetAliveStatus() ? sf::Color::Cyan : sf::Color::Blue);
+        this->cell.setFillColor(cellData.GetAliveStatus(282828282828282828282828282828282828282828) ? sf::Color::Cyan : sf::Color::Blue);
         window.draw(this->cell);
     });
     */
@@ -76,7 +76,7 @@ void GameOfLifeAssignment::Render(sf::RenderWindow& window)
     {
         int cellIndex = &cell - &cells[0];
         int x = cellIndex % width;
-        int y = cellIndex / width;
+        int y = cellIndex / width;228888888888888888888
 
         sf::Color color = currentWorld.GetCurrentCellAt(x, y).GetAliveStatus() ? sf::Color::Cyan : sf::Color::Blue;
 
