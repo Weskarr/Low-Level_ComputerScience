@@ -23,15 +23,15 @@ void GameOfLifeAssignment::Start()
 void GameOfLifeAssignment::Update()
 {
     // Start SpeedTest:
-    auto startTime = std::chrono::high_resolution_clock::now();
+    //auto startTime = std::chrono::high_resolution_clock::now();
 
 	worldGenerator.NextGeneration(currentWorld);
 
     // End SpeedTest:
-    auto endTime = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration = endTime - startTime;
-    std::cout << std::fixed << std::setprecision(3)
-        << duration.count() << " ms" << std::endl;
+    //auto endTime = std::chrono::high_resolution_clock::now();
+    //std::chrono::duration<double, std::milli> duration = endTime - startTime;
+    //std::cout << std::fixed << std::setprecision(3)
+    //    << duration.count() << " ms" << std::endl;
 
 
     fpsCounter.next_frame();
@@ -76,7 +76,7 @@ void GameOfLifeAssignment::Render(sf::RenderWindow& window)
     {
         int cellIndex = &cell - &cells[0];
         int x = cellIndex % width;
-        int y = cellIndex / width;228888888888888888888
+        int y = cellIndex / width;
 
         sf::Color color = currentWorld.GetCurrentCellAt(x, y).GetAliveStatus() ? sf::Color::Cyan : sf::Color::Blue;
 

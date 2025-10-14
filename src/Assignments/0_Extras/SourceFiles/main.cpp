@@ -78,10 +78,6 @@ int main()
                 std::cout << "CurrentAssignment is ExploringAlgoFuncAssignment" << std::endl;
                 currentAssignment->Start();
             }
-
-
-
-
             if (ImGui::Button("1. Chat Client Assignment"))
             {
                 // Set new current.
