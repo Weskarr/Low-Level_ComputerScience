@@ -13,18 +13,21 @@ else()
 endif()
 
 # Get stripped down release zips
-FetchContent_Declare(
+FetchContent_Declare
+(
  SFML
  URL "https://github.com/SFML/SFML/archive/${SFML_VERSION}.zip"
 )
 
-FetchContent_Declare(
+FetchContent_Declare
+(
  imgui
  URL "https://github.com/ocornut/imgui/archive/v${IMGUI_VERSION}.zip"
 )
 
 # imgui_sfml full repo
-FetchContent_Declare(
+FetchContent_Declare
+(
   imgui-sfml
   GIT_REPOSITORY https://github.com/SFML/imgui-sfml.git
   GIT_TAG        v3.0
@@ -44,5 +47,23 @@ FetchContent_MakeAvailable(imgui)
 set(IMGUI_DIR ${imgui_SOURCE_DIR})
 option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
 option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" ON)
+
+# Core ZeroMQ library
+FetchContent_Declare
+(
+    libzmq
+    GIT_REPOSITORY https://github.com/zeromq/libzmq.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(libzmq)
+
+# ZeroMQ C++ bindings (header-only)
+FetchContent_Declare
+(
+    cppzmq
+    GIT_REPOSITORY https://github.com/zeromq/cppzmq.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(cppzmq)
 
 FetchContent_MakeAvailable(imgui-sfml)

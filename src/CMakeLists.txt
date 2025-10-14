@@ -5,6 +5,8 @@ add_executable(low-level_setup
 target_link_libraries(low-level_setup
  PUBLIC
   ImGui-SFML::ImGui-SFML
+  cppzmq
+  libzmq
 )
 
 # Do we need this?
