@@ -248,6 +248,12 @@ void ExploringAlgoFuncAssignment::Start()
     std::cout << "Assignment Start: End!" << std::endl;
 }
 
+void ExploringAlgoFuncAssignment::Stop() 
+{
+    stopping = true;
+    stopped = true;
+}
+
 void ExploringAlgoFuncAssignment::Update()
 {
     // ...

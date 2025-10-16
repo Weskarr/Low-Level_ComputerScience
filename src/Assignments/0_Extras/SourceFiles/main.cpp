@@ -127,7 +127,15 @@ int main()
             // Add a back button.
             if (ImGui::Button("Return")) 
             {
-                // delete assignment, go back automatically.
+                // signal to stop.
+                currentAssignment->Stop();
+                std::cout << "CurrentAssignment is Stopping.." << std::endl;
+            }
+
+            // Reset when fully stopped.
+            if (currentAssignment && currentAssignment->stopped)
+            {
+                // Reset assignment.
                 currentAssignment.reset(); 
                 std::cout << "CurrentAssignment is Null" << std::endl;
             }

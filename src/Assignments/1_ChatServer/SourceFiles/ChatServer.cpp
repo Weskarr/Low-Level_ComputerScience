@@ -14,9 +14,12 @@ ChatServer::ChatServer(int port) : context(1), socket(context, zmq::socket_type:
 
 void ChatServer::run()
 {
+	running = true;
+
+	std::cout << "Chat server started." << std::endl;
 	std::thread ping_thread(&ChatServer::ping_clients, this);
 
-	while (true)
+	while (running)
 	{
 		try
 		{
@@ -34,6 +37,8 @@ void ChatServer::run()
 				<< e.what()
 				<< std::endl;
 		}
+
+		//std::cout << "ChatServer While Run Cycle Completed" << std::endl;
 	}
 
 	ping_thread.join();
@@ -299,8 +304,10 @@ void ChatServer::send_message
 
 void ChatServer::ping_clients()
 {
-	while (true)
+	while (running)
 	{
+		//std::cout << "ChatServer While Ping Cycle Completed" << std::endl;
+
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		auto now = std::chrono::steady_clock::now();
 

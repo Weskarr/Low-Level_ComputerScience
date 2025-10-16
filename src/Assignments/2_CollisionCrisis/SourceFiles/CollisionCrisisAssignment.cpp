@@ -12,6 +12,12 @@ void CollisionCrisisAssignment::Start()
     // ...
 }
 
+void CollisionCrisisAssignment::Stop() 
+{
+    stopping = true;
+    stopped = true;
+}
+
 void CollisionCrisisAssignment::Update()
 {
     // Start SpeedTest:

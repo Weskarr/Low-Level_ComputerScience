@@ -7,6 +7,7 @@ class CollisionCrisisAssignment : public Assignment
 {
 public:
     void Start() override;
+    void Stop() override;
     void Update() override;
     void Render(sf::RenderWindow& window) override;
 };

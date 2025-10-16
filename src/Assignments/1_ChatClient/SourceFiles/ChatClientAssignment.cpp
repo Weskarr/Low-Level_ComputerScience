@@ -9,7 +9,12 @@
 
 void ChatClientAssignment::Start()
 {
-	std::cout << "Start() called";
+}
+
+void ChatClientAssignment::Stop() 
+{
+	stopping = true;
+	stopped = true;
 }
 
 void ChatClientAssignment::Update()

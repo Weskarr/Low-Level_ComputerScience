@@ -16,6 +16,12 @@ void DemoAssignment::Start()
         << std::endl;
 }
 
+void DemoAssignment::Stop() 
+{
+    stopping = true;
+	stopped = true;
+}
+
 void DemoAssignment::Update() 
 {
     // Run ImGui Demo.

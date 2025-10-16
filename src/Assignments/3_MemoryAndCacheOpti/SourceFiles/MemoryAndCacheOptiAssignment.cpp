@@ -12,6 +12,12 @@ void MemoryAndCacheOptiAssignment::Start()
     // ...
 }
 
+void MemoryAndCacheOptiAssignment::Stop() 
+{
+    stopping = true;
+    stopped = true;
+}
+
 void MemoryAndCacheOptiAssignment::Update()
 {
     // Start SpeedTest:

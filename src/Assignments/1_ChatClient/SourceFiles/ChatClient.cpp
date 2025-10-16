@@ -67,7 +67,6 @@ void ChatClient::connect_to_server()
         // If socket already exists, disconnect & close it first
         if (socket) 
         {
-            socket.disconnect(server_address);
             socket.close();
         }
 
@@ -109,7 +108,6 @@ void ChatClient::disconnect()
         receive_thread.join();
 
     // Disconnect & close socket completely
-    socket.disconnect(server_address);
     socket.close();
 
     // Reset state

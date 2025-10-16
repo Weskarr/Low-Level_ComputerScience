@@ -19,6 +19,11 @@ void GameOfLifeAssignment::Start()
     worldGenerator.FirstGeneration(currentWorld);
 }
 
+void GameOfLifeAssignment::Stop() 
+{
+    stopping = true;
+    stopped = true;
+}
 
 void GameOfLifeAssignment::Update()
 {

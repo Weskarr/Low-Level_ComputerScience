@@ -10,12 +10,13 @@
     "\\src",
     "\\src\\Assignments",
     "\\src\\Assignments\\0_Extras",
+    "\\src\\Assignments\\0_Extras\\HeaderFiles",
     "\\src\\Assignments\\0_Extras\\SourceFiles",
     "\\src\\Assignments\\1_ChatClient",
     "\\src\\Assignments\\1_ChatClient\\SourceFiles",
-    "\\src\\Assignments\\1_ChatServer",
-    "\\src\\Assignments\\1_ChatServer\\HeaderFiles",
-    "\\src\\Assignments\\1_ChatServer\\SourceFiles"
+    "\\src\\Assignments\\3_MemoryAndCacheOpti",
+    "\\src\\Assignments\\3_MemoryAndCacheOpti\\SourceFiles"
   ],
+  "SelectedNode": "\\src\\Assignments\\1_ChatServer\\SourceFiles\\ChatServer.cpp",
   "PreviewInSolutionExplorer": false
 }

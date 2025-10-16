@@ -20,6 +20,7 @@ struct Client
 class ChatServer
 {
 public:
+	bool running = false;
 	ChatServer(int port);
 	void run();
 
