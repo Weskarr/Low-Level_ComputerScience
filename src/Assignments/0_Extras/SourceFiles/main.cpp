@@ -86,6 +86,14 @@ int main()
                 std::cout << "CurrentAssignment is ChatClientAssignment" << std::endl;
                 currentAssignment->Start();
             }
+            if (ImGui::Button("1. Chat Server Assignment"))
+            {
+                // Set new current.
+                // -> Is for learning networking via a server client.
+                currentAssignment = std::make_unique<ChatServerAssignment>();
+                std::cout << "CurrentAssignment is ChatServerAssignment" << std::endl;
+                currentAssignment->Start();
+            }
             if (ImGui::Button("2. Collision Crisis Assignment"))
             {
                 // Set new current.

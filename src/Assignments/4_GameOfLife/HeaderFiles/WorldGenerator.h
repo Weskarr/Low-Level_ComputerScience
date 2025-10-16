@@ -13,7 +13,6 @@ class WorldGenerator
 public:
 	void FirstGeneration(WorldData& worldData);
 	void NextGeneration(WorldData& worldData);
-
 	void ResetCellDataVector(std::vector<CellData>& cellDatas);
 	void RandomizeAliveCells(std::vector<CellData>& cellDatas, int totalCells, int alivePercentage);
 	void SyncDataVectors(std::vector<CellData>& cellDatasOne, std::vector<CellData>& cellDatasTwo);

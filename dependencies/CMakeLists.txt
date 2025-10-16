@@ -41,13 +41,13 @@ FetchContent_MakeAvailable(imgui-sfml)
 FetchContent_Declare(
     libzmq
     GIT_REPOSITORY https://github.com/zeromq/libzmq.git
-    GIT_TAG        Master
+    GIT_TAG        v4.3.5
 )
 FetchContent_MakeAvailable(libzmq)
 
 FetchContent_Declare(
     cppzmq
     GIT_REPOSITORY https://github.com/zeromq/cppzmq.git
-    GIT_TAG        Master
+    GIT_TAG        v4.11.0
 )
 FetchContent_MakeAvailable(cppzmq)

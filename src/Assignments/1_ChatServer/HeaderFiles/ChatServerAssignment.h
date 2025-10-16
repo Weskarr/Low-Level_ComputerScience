@@ -3,14 +3,15 @@
 
 #include "../../0_Extras/HeaderFiles/Assignment.h"
 
-#include "ChatClient.h"
+#include "ChatServer.h"
 
-class ChatClientAssignment : public Assignment
+class ChatServerAssignment : public Assignment
 {
 public:
     void Start() override;
     void Update() override;
     void Render(sf::RenderWindow& window) override;
 
-    ChatClient client;
+private:
+
 };

@@ -4,5 +4,18 @@
       "out\\build\\x64-Debug",
       "out\\install\\x64-Debug"
     ]
-  }
+  },
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\Assignments",
+    "\\src\\Assignments\\0_Extras",
+    "\\src\\Assignments\\0_Extras\\SourceFiles",
+    "\\src\\Assignments\\1_ChatClient",
+    "\\src\\Assignments\\1_ChatClient\\SourceFiles",
+    "\\src\\Assignments\\1_ChatServer",
+    "\\src\\Assignments\\1_ChatServer\\HeaderFiles",
+    "\\src\\Assignments\\1_ChatServer\\SourceFiles"
+  ],
+  "PreviewInSolutionExplorer": false
 }

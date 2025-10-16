@@ -7,6 +7,9 @@
 // 1. Chat Client:
 #include "../../1_ChatClient/HeaderFiles/ChatClientAssignment.h"
 
+// 1. Chat Server:
+#include "../../1_ChatServer/HeaderFiles/ChatServerAssignment.h"
+
 // 2. Collision Crisis:
 #include "../../2_CollisionCrisis/HeaderFiles/CollisionCrisisAssignment.h"
 
