@@ -6,7 +6,6 @@
 
 using namespace std::literals::chrono_literals;
 
-
 GameOfLifeAssignment::GameOfLifeAssignment()
 {
 };
