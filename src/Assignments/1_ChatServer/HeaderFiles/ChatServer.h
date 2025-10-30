@@ -37,6 +37,7 @@ public:
 	void send_message(const std::string& identity, const std::string& msg_type, const std::string& data1, const std::string& data2);
 	void ping_clients();
 	void disconnect_client(const std::string& identity);
+	void handle_password(const std::string& identity, const std::string& key);
 
 private:
 	zmq::context_t context;

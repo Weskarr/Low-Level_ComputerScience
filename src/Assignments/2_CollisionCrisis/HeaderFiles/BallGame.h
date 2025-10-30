@@ -6,7 +6,7 @@ class BallGame
 {
 private:
 	// Create balls
-	std::vector<Ball> balls;
+	//std::vector<Ball> balls;
 	std::random_device rd;
 	std::mt19937 gen;
 	std::uniform_real_distribution<float> posDist;
@@ -14,7 +14,15 @@ private:
 	std::uniform_int_distribution<int> colorDist;
 	std::uniform_real_distribution<float> radiusDist;
 
+	void BallToBallOriginal();
+	void BallToBallSpatialHashing();
+
 public:
+
+	const float cellSize = 5.0f;
+	std::vector<Ball> balls;
+	std::unordered_map<long long, std::vector<size_t>> hashGrid;
+
 	BallGame();
 	void updateBalls(const sf::Vector2u& windowSize, float deltaTime);
 	void drawBalls(sf::RenderWindow& window);

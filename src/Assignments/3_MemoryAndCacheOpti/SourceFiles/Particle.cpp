@@ -2,9 +2,20 @@
 #include "../HeaderFiles/Particle.h"
 
 Particle::Particle(sf::Vector2f pos, sf::Vector2f vel, sf::Color col, float life)
-    : isDying(false), active(true), position(pos), velocity(vel), color(col),
-    lifetime(life), maxLifetime(life), hasGravity(true), isVisible(true),
-    mass(1.0f), collisionEnabled(true), radius(2.0f), effectType('n')
+    : 
+    isDying(false), 
+    active(true), 
+    position(pos), 
+    velocity(vel), 
+    color(col),
+    lifetime(life), 
+    maxLifetime(life), 
+    hasGravity(true), 
+    isVisible(true),
+    mass(1.0f), 
+    collisionEnabled(true), 
+    radius(2.0f), 
+    effectType('n')
 {
     // Shape
     shape = new sf::CircleShape(radius);
@@ -57,24 +68,27 @@ void Particle::update(float deltaTime)
 
     // Lifetime management
     lifetime -= deltaTime;
-    if (lifetime <= 0) {
+    if (lifetime <= 0) 
+    {
         isDying = true;
         active = false;
     }
 
     // Bounds checking
-    if (position.x < 0 || position.x > 800 || position.y < 0 || position.y > 800) {
+    if (position.x < 0 || position.x > 960 || position.y < 0 || position.y > 540) 
+    {
         if (collisionEnabled) {
             velocity *= -0.8f;
-            position.x = std::clamp(position.x, 0.0f, 800.0f);
-            position.y = std::clamp(position.y, 0.0f, 800.0f);
+            position.x = std::clamp(position.x, 0.0f, 960.0f);
+            position.y = std::clamp(position.y, 0.0f, 540.0f);
         }
     }
 }
 
 void Particle::render(sf::RenderWindow& window)
 {
-    if (isVisible && active) {
+    if (isVisible && active) 
+    {
         window.draw(*shape);
     }
 }

@@ -1,8 +1,6 @@
 
 
-#include "imgui.h"
-#include "imgui-SFML.h"
-#include "Thread"
+
 
 #include <iostream> // For Debugging.
 

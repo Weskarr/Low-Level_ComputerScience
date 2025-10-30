@@ -33,9 +33,9 @@ public:
     void Render(sf::RenderWindow& window) override;
 
 private:
-    WorldData currentWorld = WorldData(250, 250, 2, 75, new ConwayRules, new MooreOffsets);
+    //WorldData currentWorld = WorldData(250, 250, 2, 75, new ConwayRules, new MooreOffsets);
 	//WorldData currentWorld = WorldData(250, 250, 1, 60, new HighLifeRules, new SpacedStarOffsets);
-    //WorldData currentWorld = WorldData(250, 250, 1, 80, new DayNight, new NinjaStarOffsets);
+    WorldData currentWorld = WorldData(250, 250, 2, 80, new DayNight, new NinjaStarOffsets);
 	WorldGenerator worldGenerator;
 
     FrameCounter<> fpsCounter;

@@ -52,4 +52,5 @@ private:
     char target_buffer[64] = "";
     char message_buffer[256] = "";
     char server_buffer[128] = "tcp://localhost:5555";
+    char password_buffer[32] = "Passkey123";
 };

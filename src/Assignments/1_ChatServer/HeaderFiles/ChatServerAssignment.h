@@ -1,7 +1,10 @@
 
-#include <SFML/Graphics.hpp>
-
 #include "../../0_Extras/HeaderFiles/Assignment.h"
+
+#include <SFML/Graphics.hpp>
+#include "imgui.h"
+#include "imgui-SFML.h"
+#include "Thread"
 
 #include "ChatServer.h"
 

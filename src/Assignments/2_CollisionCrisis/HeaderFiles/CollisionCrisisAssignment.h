@@ -28,4 +28,11 @@ private:
     float timeSinceLastLog = 0.0f;
     FrameCounterTwo<> fpsCounterTwo;
     std::chrono::time_point<std::chrono::high_resolution_clock> lastReportTime;
+
+    // For calculating average.
+    int totalBalls = 0;
+    float totalSpeed = 0.0f;
+    float totalTime = 0.0f;
+    int totalFPS = 0.0f;
+    int totalHashes = 0.0f;
 };

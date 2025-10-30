@@ -3,8 +3,13 @@
 
 #include "../../0_Extras/HeaderFiles/Assignment.h"
 
+#include "imgui.h"
+#include "imgui-SFML.h"
+#include <iostream>
+
 #include "ParticleSystem.h"
 #include "FPSCounterThree.h"
+#include "MemoryTracker.h"
 
 class MemoryAndCacheOptiAssignment : public Assignment
 {
@@ -23,5 +28,13 @@ public:
     float deltaTime = 0.0f;
     float timeSinceLastLog = 0.0f;
     FrameCounterThree<> fpsCounterThree;
+    MemoryTracker memoryTracker;
     std::chrono::time_point<std::chrono::high_resolution_clock> lastReportTime;
+
+    size_t prevAllocated = 0;
+    size_t prevAllocCount = 0;
+    size_t prevDeallocCount = 0;
+
+    WayOfStorage wayOfStorage = WayOfStorage::AoS;
+    const bool multiThreading = false;
 };

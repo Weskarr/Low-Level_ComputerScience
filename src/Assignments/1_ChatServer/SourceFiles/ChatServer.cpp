@@ -83,6 +83,28 @@ void ChatServer::handle_message(zmq::multipart_t& msg)
 		handle_left_message(identity);
 		disconnect_client(identity);
 	}
+	else if (msg_type == "LOGIN")
+	{
+		handle_password(identity, msg[2].to_string());
+	}
+}
+
+void ChatServer::handle_password(const std::string& identity, const std::string& key)
+{
+	// Password Check.
+	if (key == "Passkey123") 
+	{
+		// Accepted Entry.
+		std::cout << "Login Server Accepted." << std::endl;
+		handle_connect(identity);
+		send_message(identity, "LOGIN_ACCEPTED");
+	}
+	else
+	{
+		// Denied Entry.
+		std::cout << "Login Server Denied." << std::endl;
+		send_message(identity, "LOGIN_DENIED");
+	}
 }
 
 void ChatServer::handle_connect(const std::string& identity)
@@ -227,6 +249,7 @@ void ChatServer::handle_public_message
 
 void ChatServer::handle_left_message(const std::string& sender_identity)
 {
+	// Skip this if only one or no name is set.
 	if (clients.find(sender_identity) == clients.end()
 		|| !clients[sender_identity].authenticated)
 	{
@@ -234,16 +257,21 @@ void ChatServer::handle_left_message(const std::string& sender_identity)
 		return;
 	}
 
-	for (auto& [identity, client] : clients)
-	{
-		// Forward message to all
-		send_message(identity, "LEFT",
-			clients[sender_identity].username);
-	}
+	// Get the name safely
+	const std::string& name = clients[sender_identity].username;
 
+	// skip clients with no name
+	if (name.empty()) 
+		return; 
+
+	// Forward message to all.
+	for (auto& [identity, client] : clients)
+		send_message(identity, "LEFT", name);
+
+	// Also console it.
 	std::cout
 		<< "Left: "
-		<< clients[sender_identity].username
+		<< name
 		<< std::endl;
 }
 
@@ -252,12 +280,16 @@ void ChatServer::send_disconnect_message
 	const std::string& sender_identity
 )
 {
-	for (auto& [identity, client] : clients)
+	/*
+		for (auto& [identity, client] : clients)
 	{
 		// Forward message to all
 		send_message(identity, "LEFT",
 			clients[sender_identity].username);
 	}
+	*/
+
+	handle_left_message(sender_identity);
 }
 
 void ChatServer::send_message

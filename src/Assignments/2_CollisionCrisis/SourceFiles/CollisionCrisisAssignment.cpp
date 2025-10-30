@@ -33,19 +33,28 @@ void CollisionCrisisAssignment::Update()
     lastReportTime = now;
 
     // Add for reporting
-    timeSinceLastLog += deltaTime;
+    //timeSinceLastLog += deltaTime;
 
     // Update fps counter.
     fpsCounterTwo.next_frame();
 
     // Log it to console.
-    if (timeSinceLastLog >= 1.0f)
+    //if (timeSinceLastLog >= 1.0f)
     {
         lastReportTime = now;
-        std::chrono::duration<double, std::milli> duration = endTime - startTime;
+        std::chrono::duration<float, std::milli> duration = endTime - startTime;
 
-        std::cout
-            << std::endl;
+        int currentBallAmount = ballGame.balls.size();
+        float currentSpeed = duration.count();
+        float currentTime = deltaTime;
+        int currentFPS = fpsCounterTwo.fps();
+        int currentHashes = ballGame.hashGrid.size();
+
+        totalBalls += currentBallAmount;
+        totalSpeed += currentSpeed;
+        totalTime += currentTime;
+        totalFPS += currentFPS;
+        totalHashes += currentHashes;
 
         std::cout
             << "[GEN]: "
@@ -53,24 +62,104 @@ void CollisionCrisisAssignment::Update()
             << std::endl;
 
         std::cout
+            << "[BALLS]: "
+            << currentBallAmount
+            << std::endl;
+
+        std::cout
             << "[SPEED]: "
             << std::fixed
             << std::setprecision(3)
-            << duration.count()
+            << currentSpeed
             << "ms"
             << std::endl;
 
         std::cout
             << "[TIME]: "
-            << deltaTime
+            << currentTime
             << "s"
             << std::endl;
 
         std::cout
             << "[FPS]: "
-            << fpsCounterTwo.fps()
+            << currentFPS
             << "fps"
             << std::endl;
+
+        // For spatial hashing below.
+
+        std::cout
+            << "[HASHES]: "
+            << currentHashes
+            << std::endl;
+
+        std::cout
+            << "[CELLSIZE]: "
+            << ballGame.cellSize
+            << std::endl;
+
+        // Extra spacing.
+
+        std::cout
+            << std::endl;
+    }
+
+    if (generation == 1000) 
+    {
+        int averageBalls = totalBalls / generation;
+        float averageSpeed = totalSpeed / generation;
+        float averageTime = totalTime / generation;
+        int averageFPS = totalFPS / generation;
+        int averageHashes = totalHashes / generation;
+
+        std::cout
+            << "[AVERAGE OF GENERATIONS]: "
+            << generation
+            << std::endl;
+
+        std::cout
+            << "[BALLS AVERAGE]: "
+            << averageBalls
+            << std::endl;
+
+        std::cout
+            << "[SPEED AVERAGE]: "
+            << std::fixed
+            << std::setprecision(3)
+            << averageSpeed
+            << "ms"
+            << std::endl;
+
+        std::cout
+            << "[TIME AVERAGE]: "
+            << averageTime
+            << "s"
+            << std::endl;
+
+        std::cout
+            << "[FPS AVERAGE]: "
+            << averageFPS
+            << "fps"
+            << std::endl;
+
+        // For spatial hashing below:
+
+        std::cout
+            << "[HASHES AVERAGE]: "
+            << averageHashes
+            << std::endl;
+
+        std::cout
+            << "[CELLSIZE]: "
+            << ballGame.cellSize
+            << std::endl;
+
+        // Extra spacing.
+
+        std::cout
+            << std::endl;
+
+        Stop();
     }
 }
 

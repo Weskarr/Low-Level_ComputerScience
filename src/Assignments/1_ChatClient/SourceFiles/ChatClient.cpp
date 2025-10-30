@@ -64,30 +64,30 @@ void ChatClient::connect_to_server()
 {
     try
     {
-        // If socket already exists, disconnect & close it first
+        // If socket already exists, disconnect & close it first.
         if (socket) 
         {
             socket.close();
         }
 
-        // Create fresh socket to avoid auto ping disconnects
+        // Create fresh socket to avoid auto ping disconnects.
         socket = zmq::socket_t(context, zmq::socket_type::dealer);
 
-        // Randomize identity
+        // Randomize identity.
         random_identity();
 
-        // Connect to server
+        // Connect to server.
         socket.connect(server_buffer);
         server_address = server_buffer;
-        connected = true;
         running = true;
 
-        // Start receiving thread if not running
+        // Start receiving thread if not running.
         if (!receive_thread.joinable())
             receive_thread = std::thread(&ChatClient::receive_loop, this);
 
-		// Send message tp server
-        send_message("CONNECT");
+		// Send login message to server.
+        //send_message("CONNECT");
+        send_message("LOGIN", std::string(password_buffer));
 
 		// Visualise connection message
         add_message("Connecting to " + server_address + "...");
@@ -196,6 +196,7 @@ void ChatClient::render_gui()
     if (!connected)
     {
         ImGui::InputText("Server", server_buffer, sizeof(server_buffer));
+        ImGui::InputText("Password", password_buffer, sizeof(password_buffer));
 
         if (ImGui::Button("Connect"))
             connect_to_server();
@@ -423,8 +424,19 @@ void ChatClient::handle_server_message(zmq::multipart_t& msg)
         std::string user_left = msg[1].to_string();
         add_message("[PUBLIC] " + user_left + " left the chat.");
     }
+    else if (msg_type == "LOGIN_ACCEPTED")
+    {
+        add_message("[PRIVATE] Login accepted, correct password.");
+        connected = true;
+    }
+    else if (msg_type == "LOGIN_DENIED")
+    {
+        add_message("[PRIVATE] Login denied, incorrect password.");
+        connected = false;
+    }
 
     // TODO: Implement messages from server:
+    // 
     // x    CONNECTED
     // x    DISCONNECTED
     // x    PING
@@ -437,6 +449,9 @@ void ChatClient::handle_server_message(zmq::multipart_t& msg)
     // x    PUBLIC_MSG
     // x    JOINED
     // x    LEFT
+    // x    LOGIN_ACCEPTED  (Own addition!)
+    // x    LOGIN_DENIED    (Own addition!)
+    // 
     // Use "add_message(...)" function to put things into the Chat Window
     // TIP: you can read the data out of a msg by msg[1], msg[2], etc., and
     // check the number of parts of the message with msg.size()
