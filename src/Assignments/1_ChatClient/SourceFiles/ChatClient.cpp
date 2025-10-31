@@ -180,12 +180,13 @@ void ChatClient::leave()
 
 void ChatClient::render_gui()
 {
-    // Connection panel
+    // Connection panel.
     ImGui::Begin("Chat Client");
 
-    // Debug flags for development
+    // Debug flags for development.
     ImGui::Text
     (
+        // Suggestion from ChatGPT, absolutely love it!
         "Debug: connected=%s authenticated=%s identity=%s name=%s",
         connected ? "true" : "false",
         authenticated ? "true" : "false",

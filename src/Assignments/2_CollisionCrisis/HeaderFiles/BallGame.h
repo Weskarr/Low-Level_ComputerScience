@@ -20,8 +20,10 @@ private:
 public:
 
 	const float cellSize = 5.0f;
+
 	std::vector<Ball> balls;
-	std::unordered_map<long long, std::vector<size_t>> hashGrid;
+	std::unordered_map<long long, 
+		std::vector<size_t>> hashGrid;
 
 	BallGame();
 	void updateBalls(const sf::Vector2u& windowSize, float deltaTime);

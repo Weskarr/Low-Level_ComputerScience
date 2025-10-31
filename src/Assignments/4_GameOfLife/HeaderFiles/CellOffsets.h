@@ -4,7 +4,8 @@
 #include <utility>  // for std::pair
 #include <vector>
 
-class CellOffsets {
+class CellOffsets 
+{
 public:
     virtual ~CellOffsets() = default;
     CellOffsets() = default;

@@ -12,10 +12,13 @@ ChatServerAssignment::~ChatServerAssignment()
 
 void ChatServerAssignment::Start()
 {
-    server = std::make_unique<ChatServer>(5555); // allocate on heap
+    // Allocate on heap
+    server = std::make_unique<ChatServer>(5555); 
 
-    serverThread = std::thread([this]() {
-        server->run(); // runs until server->running == false
+    // Runs until server->running == false.
+    serverThread = std::thread([this]() 
+    {
+        server->run();
     });
 }
 
@@ -23,7 +26,7 @@ void ChatServerAssignment::Stop()
 {
 	stopping = true;
 
-    // signal the server to stop
+    // Signal the server to stop.
     if (server)
         server->running = false;     
 }

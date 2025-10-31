@@ -78,34 +78,35 @@ void BallGame::BallToBallOriginal()
 			float radius1 = ball1.shape.getRadius();
 			float radius2 = ball2.shape.getRadius();
 
-			// Calculate distance between centers
+			// Calculate distance between centers.
 			sf::Vector2f delta = pos2 - pos1;
 			float distance = std::sqrt(delta.x * delta.x + delta.y * delta.y);
 			float minDistance = radius1 + radius2;
 
 			if (distance < minDistance && distance > 0)
 			{
-				// Normalize collision vector
+				// Normalize collision vector.
 				sf::Vector2f normal = delta / distance;
 
-				// Separate balls to prevent overlap
+				// Separate balls to prevent overlap.
 				float overlap = minDistance - distance;
 				sf::Vector2f separation = normal * (overlap * 0.5f);
 				ball1.shape.setPosition(pos1 - separation);
 				ball2.shape.setPosition(pos2 + separation);
 
-				// Calculate relative velocity
+				// Calculate relative velocity.
 				sf::Vector2f relativeVel = ball2.velocity - ball1.velocity;
 				float velAlongNormal = relativeVel.x * normal.x + relativeVel.y * normal.y;
 
-				// Don't resolve if velocities are separating
+				// Don't resolve if velocities are separating.
 				if (velAlongNormal > 0) continue;
 
-				// Apply collision response (elastic collision)
-				float restitution = 0.0f; // Bounce factor (0 = no bounce, 1 = perfect bounce)
+				// Apply collision response.
+				// -> Bounce factor (0 = no bounce, 1 = perfect bounce)
+				float restitution = 0.0f;
 				float impulse = -(1 + restitution) * velAlongNormal;
 
-				// Assume equal mass for simplicity
+				// Assume equal mass for simplicity.
 				sf::Vector2f impulseVector = impulse * normal;
 				ball1.velocity -= impulseVector;
 				ball2.velocity += impulseVector;
@@ -120,7 +121,7 @@ void BallGame::BallToBallSpatialHashing()
 	hashGrid.clear();
 
 	// Create hash function for converting 2D grid coordinates to a unique key.
-	// -> Absolutely no idea how this part works, voodo blackmagic shit.
+	// -> Absolutely no idea how this part works?
 	auto hash = [&](int x, int y) 
 	{
 		return (static_cast<long long>(x) << 32) | (static_cast<long long>(y) & 0xffffffff);
@@ -162,35 +163,36 @@ void BallGame::BallToBallSpatialHashing()
 					float radius1 = ball1.shape.getRadius();
 					float radius2 = ball2.shape.getRadius();
 
-					// Calculate distance between centers
+					// Calculate distance between centers.
 					sf::Vector2f delta = pos2 - pos1;
 					float distance = std::sqrt(delta.x * delta.x + delta.y * delta.y);
 					float minDistance = radius1 + radius2;
 
 					if (distance < minDistance && distance > 0)
 					{
-						// Normalize collision vector
+						// Normalize collision vector.
 						sf::Vector2f normal = delta / distance;
 
-						// Separate balls to prevent overlap
+						// Separate balls to prevent overlap.
 						float overlap = minDistance - distance;
 						sf::Vector2f separation = normal * (overlap * 0.5f);
 						ball1.shape.move(-separation);
 						ball2.shape.move(separation);
 
-						// Calculate relative velocity
+						// Calculate relative velocity.
 						sf::Vector2f relativeVel = ball2.velocity - ball1.velocity;
 						float velAlongNormal = relativeVel.x * normal.x + relativeVel.y * normal.y;
 
-						// Don't resolve if velocities are separating
-						if (velAlongNormal > 0) continue;
+						// Don't resolve if velocities are separating.
+						if (velAlongNormal > 0) 
+							continue;
 
-
-						// Apply collision response (elastic collision)
-						float restitution = 0.0f; // Bounce factor (0 = no bounce, 1 = perfect bounce)
+						// Apply collision response.
+						// -> Bounce factor (0 = no bounce, 1 = perfect bounce)
+						float restitution = 0.0f;
 						float impulse = -(1 + restitution) * velAlongNormal;
 
-						// Assume equal mass for simplicity
+						// Assume equal mass for simplicity.
 						sf::Vector2f impulseVector = impulse * normal;
 						ball1.velocity -= impulseVector;
 						ball2.velocity += impulseVector;

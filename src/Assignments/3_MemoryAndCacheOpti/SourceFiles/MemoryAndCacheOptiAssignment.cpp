@@ -12,7 +12,7 @@ void MemoryAndCacheOptiAssignment::Start()
         thisRandomSeed
     );
 
-    particleSystem.Spawn(count, origin);
+    particleSystem.Spawn(startParticleCount, origin);
 
     lastReportTime = std::chrono::high_resolution_clock::now();
 }
@@ -228,7 +228,7 @@ void MemoryAndCacheOptiAssignment::Update()
 
             std::cout
                 << "[START PARTICLES]:  "
-                << count
+                << startParticleCount
                 << std::endl;
 
             std::cout
