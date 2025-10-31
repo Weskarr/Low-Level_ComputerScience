@@ -6,6 +6,7 @@ size_t MemoryTracker::totalAllocated = 0;
 size_t MemoryTracker::peakAllocated = 0;
 size_t MemoryTracker::allocCount = 0;
 size_t MemoryTracker::deallocCount = 0;
+size_t MemoryTracker::simAllocated = 0;
 
 // Override global new/delete
 void* operator new(std::size_t size)

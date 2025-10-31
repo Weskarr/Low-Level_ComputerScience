@@ -11,4 +11,5 @@ public:
     static size_t peakAllocated;
     static size_t allocCount;
     static size_t deallocCount;
+    static size_t simAllocated;
 };

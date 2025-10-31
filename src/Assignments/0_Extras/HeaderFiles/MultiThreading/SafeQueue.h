@@ -4,6 +4,11 @@
 #include <mutex>
 #include <queue>
 
+
+// IMPORTANT: 
+// -> From "mtrebi" !!!
+
+
 // Thread safe implementation of a Queue using an std::queue
 template <typename T>
 class SafeQueue 

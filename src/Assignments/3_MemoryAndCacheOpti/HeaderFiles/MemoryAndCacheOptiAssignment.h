@@ -10,6 +10,7 @@
 #include "ParticleSystem.h"
 #include "FPSCounterThree.h"
 #include "MemoryTracker.h"
+//#include "ThreadPool.h"
 
 class MemoryAndCacheOptiAssignment : public Assignment
 {
@@ -21,12 +22,19 @@ public:
 
     ParticleSystem particleSystem;
     sf::Vector2f origin = { 480.0f, 270.0f };
-    int count = 10000;
+    int count = 1000;
 
     bool isFinished = false;
     int generation = 0;
     float deltaTime = 0.0f;
-    float timeSinceLastLog = 0.0f;
+    float totalRuntime = 0.0f;
+
+
+    float fixedTimeStep = 0.1f;
+    float simSpeed = 0.0f;
+    float simTime = 0.0f;
+    float simFPS = 0.0f;
+
     FrameCounterThree<> fpsCounterThree;
     MemoryTracker memoryTracker;
     std::chrono::time_point<std::chrono::high_resolution_clock> lastReportTime;
@@ -35,6 +43,8 @@ public:
     size_t prevAllocCount = 0;
     size_t prevDeallocCount = 0;
 
-    WayOfStorage wayOfStorage = WayOfStorage::AoS;
-    const bool multiThreading = false;
+    WayOfStorage thisWayOfStorage = WayOfStorage::AoS;
+    bool thisMultiThreading = true;
+    bool thisRandomSeed = false;
+    bool thisFixedTime = true;
 };

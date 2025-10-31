@@ -1,0 +1,189 @@
+Dingen die opvallen:
+1. Voor kleine hoeveelheden particles is er weinig verschil tussen alle vier.
+2. Single-threaded simulaties worden trager naarmate het aantal particles stijgt.
+3. Multi-threaded simulaties geven bij grotere workloads een flinke snelheidswinst.
+4. In grotere simulaties met fixed timing is er een extra generatie, unieke artifact.
+5. SoA is efficiënter in (de)allocaties en dus cache, maar is ook betrouwbaarder.
+6. AoS heeft soms apart hoge (de)allocaties in vergelijking met de rest.
+7. SoA gebruikt iets meer geheugen per particle.
+
+
+// SoA & Multi-threaded
+
+[GENERATIONS]:      51
+[SIM SPEED]:        8.810ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      45.706fps
+[START PARTICLES]:  1000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   67.94 KB
+[MEMORY CURRENT]:   68.41 KB
+[MEMORY PEAK]:      71.40 KB
+[ALLOC COUNT]:      273844
+[DEALLOC COUNT]:    273144
+[THREADS USED]:     12
+
+[GENERATIONS]:      51
+[SIM SPEED]:        14.836ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      20.902fps
+[START PARTICLES]:  10000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   322.10 KB
+[MEMORY CURRENT]:   322.19 KB
+[MEMORY PEAK]:      349.40 KB
+[ALLOC COUNT]:      2540925
+[DEALLOC COUNT]:    2540223
+[THREADS USED]:     12
+
+[GENERATIONS]:      52
+[SIM SPEED]:        87.189ms
+[SIM TIME]:         5.200s
+[AVERAGE FPS]:      10.077fps
+[START PARTICLES]:  100000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   2924.78 KB
+[MEMORY CURRENT]:   2924.81 KB
+[MEMORY PEAK]:      3279.70 KB
+[ALLOC COUNT]:      25219448
+[DEALLOC COUNT]:    25218725
+[THREADS USED]:     12
+
+
+// SoA & Single-threaded
+
+[GENERATIONS]:      51
+[SIM SPEED]:        2.998ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      47.020fps
+[START PARTICLES]:  1000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   63.40 KB
+[MEMORY CURRENT]:   63.40 KB
+[MEMORY PEAK]:      66.18 KB
+[ALLOC COUNT]:      276763
+[DEALLOC COUNT]:    276098
+[THREADS USED]:     1
+
+[GENERATIONS]:      51
+[SIM SPEED]:        24.128ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      20.373fps
+[START PARTICLES]:  10000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   317.68 KB
+[MEMORY CURRENT]:   317.68 KB
+[MEMORY PEAK]:      349.34 KB
+[ALLOC COUNT]:      2533049
+[DEALLOC COUNT]:    2532384
+[THREADS USED]:     1
+
+[GENERATIONS]:      52
+[SIM SPEED]:        226.553ms
+[SIM TIME]:         5.200s
+[AVERAGE FPS]:      10.077fps
+[START PARTICLES]:  100000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   SoA
+[MEMORY AVERAGE]:   2921.07 KB
+[MEMORY CURRENT]:   2921.07 KB
+[MEMORY PEAK]:      3279.68 KB
+[ALLOC COUNT]:      25212634
+[DEALLOC COUNT]:    25211918
+[THREADS USED]:     1
+
+
+// AoS & Multi-threaded
+
+[GENERATIONS]:      51
+[SIM SPEED]:        8.868ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      44.980fps
+[START PARTICLES]:  1000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   67.54 KB
+[MEMORY CURRENT]:   67.88 KB
+[MEMORY PEAK]:      70.47 KB
+[ALLOC COUNT]:      277316
+[DEALLOC COUNT]:    276623
+[THREADS USED]:     12
+
+[GENERATIONS]:      51
+[SIM SPEED]:        12.973ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      20.725fps
+[START PARTICLES]:  10000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   314.20 KB
+[MEMORY CURRENT]:   314.29 KB
+[MEMORY PEAK]:      316.57 KB
+[ALLOC COUNT]:      5161751
+[DEALLOC COUNT]:    5161053
+[THREADS USED]:     12
+
+[GENERATIONS]:      52
+[SIM SPEED]:        68.937ms
+[SIM TIME]:         5.200s
+[AVERAGE FPS]:      10.077fps
+[START PARTICLES]:  100000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   2775.73 KB
+[MEMORY CURRENT]:   2775.95 KB
+[MEMORY PEAK]:      2779.17 KB
+[ALLOC COUNT]:      25222027
+[DEALLOC COUNT]:    25221282
+[THREADS USED]:     12
+
+
+// AoS & Single-threaded
+
+[GENERATIONS]:      51
+[SIM SPEED]:        2.329ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      40.980fps
+[START PARTICLES]:  1000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   62.95 KB
+[MEMORY CURRENT]:   62.95 KB
+[MEMORY PEAK]:      63.90 KB
+[ALLOC COUNT]:      320363
+[DEALLOC COUNT]:    319704
+[THREADS USED]:     1
+
+[GENERATIONS]:      51
+[SIM SPEED]:        19.851ms
+[SIM TIME]:         5.100s
+[AVERAGE FPS]:      20.902fps
+[START PARTICLES]:  10000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   309.21 KB
+[MEMORY CURRENT]:   309.21 KB
+[MEMORY PEAK]:      310.16 KB
+[ALLOC COUNT]:      2535761
+[DEALLOC COUNT]:    2535097
+[THREADS USED]:     1
+
+[GENERATIONS]:      52
+[SIM SPEED]:        189.276ms
+[SIM TIME]:         5.200s
+[AVERAGE FPS]:      10.077fps
+[START PARTICLES]:  100000
+[TIMING]:           FIXED
+[WAY OF STORAGE]:   AoS
+[MEMORY AVERAGE]:   2771.63 KB
+[MEMORY CURRENT]:   2772.13 KB
+[MEMORY PEAK]:      2773.08 KB
+[ALLOC COUNT]:      25214131
+[DEALLOC COUNT]:    25213410
+[THREADS USED]:     1
+

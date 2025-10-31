@@ -7,8 +7,12 @@
 
 #include "../HeaderFiles/AssignmentHeaderPaths.h"
 
+#include "../HeaderFiles/MultiThreading/ThreadPool.h"
+
 int main()
 {
+    ThreadPool::GetInstance().init();
+
     // Unique pointer to the current assignment.
     std::unique_ptr<Assignment> currentAssignment = nullptr;
 

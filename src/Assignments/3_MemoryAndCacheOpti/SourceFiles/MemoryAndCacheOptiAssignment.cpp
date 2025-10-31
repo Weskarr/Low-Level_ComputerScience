@@ -3,27 +3,36 @@
 
 void MemoryAndCacheOptiAssignment::Start()
 {
-    lastReportTime = std::chrono::high_resolution_clock::now();
-    particleSystem.spawnParticles(wayOfStorage, count, origin);
+    memoryTracker.simAllocated = 0;
 
-    if (multiThreading)
-        particleSystem.InitializeThreadPool();
+    particleSystem.Start
+    (
+        thisWayOfStorage,
+        thisMultiThreading,
+        thisRandomSeed
+    );
+
+    particleSystem.Spawn(count, origin);
+
+    lastReportTime = std::chrono::high_resolution_clock::now();
 }
 
 void MemoryAndCacheOptiAssignment::Stop() 
 {
+    //particleSystem.Stop();
+
     stopping = true;
     stopped = true;
-
-    if (multiThreading)
-        particleSystem.ShutdownThreadPool();
 }
 
 void MemoryAndCacheOptiAssignment::Update()
 {
     // Is finished condition check.
-    if (isFinished)
+    if (isFinished) 
+    {
+        Stop();
         return;
+    }
 
     // Increment cycles.
     generation++;
@@ -32,47 +41,42 @@ void MemoryAndCacheOptiAssignment::Update()
     auto startTime = std::chrono::high_resolution_clock::now();
 
     // Everything being speed tested.
-    if (multiThreading)
-        particleSystem.UpdateThreadPool(wayOfStorage, deltaTime);
-    else
-        particleSystem.UpdateOriginal(wayOfStorage, deltaTime);
-
-
+    particleSystem.Update(deltaTime);
 
     // End speed test.
     auto endTime = std::chrono::high_resolution_clock::now();
 
-    // Time tracking
-    auto now = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<float> frameDelta = now - lastReportTime;
-    deltaTime = frameDelta.count();
-    lastReportTime = now;
+    // Time tracking method.
+    if (!thisFixedTime) 
+    {
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> elapsed = now - lastReportTime;
+        deltaTime = elapsed.count();
+        lastReportTime = now;
 
-    // Add for reporting
-    //timeSinceLastLog += deltaTime;
+    }
+    else 
+    {
+        deltaTime = fixedTimeStep;
+    }
+
+    // Increment to total runtime.
+    totalRuntime += deltaTime;
 
     // Update fps counter.
     fpsCounterThree.next_frame();
 
     // Log it to console.
-    int particleCount = particleSystem.getParticleCount(wayOfStorage);
-    //if (timeSinceLastLog >= 1.0f)
+    int particleCount = particleSystem.GetParticleCount();
 
-        // Is finished condition switch.
-    if (particleCount <= 0)
-        isFinished = true;
-
-    if (generation == 1 ||
-        generation == 40 ||
-        isFinished)
     {
         // Extra spacing.
         std::cout << std::endl;
 
         // General statistics related.
         {
-            lastReportTime = now;
-            std::chrono::duration<double, std::milli> duration = endTime - startTime;
+            float speed = std::chrono::duration<float, std::milli>(endTime - startTime).count();
+            float fps = fpsCounterThree.fps();
 
             std::cout
                 << "[GEN]:              "
@@ -83,19 +87,19 @@ void MemoryAndCacheOptiAssignment::Update()
                 << "[SPEED]:            "
                 << std::fixed
                 << std::setprecision(3)
-                << duration.count()
+                << speed
                 << "ms"
                 << std::endl;
 
             std::cout
                 << "[TIME]:             "
-                << deltaTime
+                << totalRuntime
                 << "s"
                 << std::endl;
 
             std::cout
                 << "[FPS]:              "
-                << fpsCounterThree.fps()
+                << fps
                 << "fps"
                 << std::endl;
 
@@ -103,6 +107,15 @@ void MemoryAndCacheOptiAssignment::Update()
                 << "[PARTICLES]:        "
                 << particleCount
                 << std::endl;
+
+            std::cout
+                << "[TIMING]:           "
+                << ((thisFixedTime) ? "FIXED" : "DELTA")
+                << std::endl;
+
+            // Save for last summary.
+            simSpeed += speed;
+            simFPS += fps;
         }
 
         // Memory tracking related
@@ -120,7 +133,7 @@ void MemoryAndCacheOptiAssignment::Update()
 
             std::cout
                 << "[WAY OF STORAGE]:   "
-                << ((wayOfStorage == WayOfStorage::SoA) ? "SoA" : "AoS")
+                << ((thisWayOfStorage == WayOfStorage::SoA) ? "SoA" : "AoS")
                 << std::endl;
 
             std::cout
@@ -163,19 +176,131 @@ void MemoryAndCacheOptiAssignment::Update()
             prevAllocated = currentAllocTotal;
             prevAllocCount = currentAllocCount;
             prevDeallocCount = currentDeallocCount;
+
+            // Save for last summary.
+            memoryTracker.simAllocated += currentAllocTotal;
         }
         
         // Multi-threading related.
         {
             std::cout
                 << "[THREADS USED]:     "
-                << ((multiThreading) ? particleSystem.Pool.getThreadCount() : 1)
+                << ((thisMultiThreading) ? std::to_string(particleSystem.GetThreadCount()) : "1")
                 << std::endl;
         }
+    }
+
+    // Is finished condition switch & simulation summary.
+    if (particleCount <= 0)
+    {
+        isFinished = true;
+
+        // Extra-extra spacing.
+        std::cout << std::endl;
+        std::cout << std::endl;
+
+        // General statistics related.
+        {
+            std::cout
+                << "[GENERATIONS]:      "
+                << generation
+                << std::endl;
+
+            std::cout
+                << "[SIM SPEED]:        "
+                << std::fixed
+                << std::setprecision(3)
+                << simSpeed
+                << "ms"
+                << std::endl;
+
+            std::cout
+                << "[SIM TIME]:         "
+                << totalRuntime
+                << "s"
+                << std::endl;
+
+            std::cout
+                << "[AVERAGE FPS]:      "
+                << (simFPS / generation)
+                << "fps"
+                << std::endl;
+
+            std::cout
+                << "[START PARTICLES]:  "
+                << count
+                << std::endl;
+
+            std::cout
+                << "[TIMING]:           "
+                << ((thisFixedTime) ? "FIXED" : "DELTA")
+                << std::endl;
+        }
+
+        // Memory tracking related
+        {
+            // Currents:
+            size_t currentAllocTotal = memoryTracker.totalAllocated;
+            size_t currentAllocPeak = memoryTracker.peakAllocated;
+            size_t currentAllocCount = memoryTracker.allocCount;
+            size_t currentDeallocCount = memoryTracker.deallocCount;
+            size_t simulationAverage = memoryTracker.simAllocated / generation;
+
+            std::cout
+                << "[WAY OF STORAGE]:   "
+                << ((thisWayOfStorage == WayOfStorage::SoA) ? "SoA" : "AoS")
+                << std::endl;
+
+            std::cout
+                << "[MEMORY AVERAGE]:   "
+                << std::fixed
+                << std::setprecision(2)
+                << simulationAverage / 1024.0
+                << " KB"
+                << std::endl;
+
+            std::cout
+                << "[MEMORY CURRENT]:   "
+                << std::fixed
+                << std::setprecision(2)
+                << currentAllocTotal / 1024.0
+                << " KB"
+                << std::endl;
+
+            std::cout
+                << "[MEMORY PEAK]:      "
+                << std::fixed
+                << std::setprecision(2)
+                << currentAllocPeak / 1024.0
+                << " KB"
+                << std::endl;
+
+            std::cout
+                << "[ALLOC COUNT]:      "
+                << currentAllocCount
+                << std::endl;
+
+            std::cout
+                << "[DEALLOC COUNT]:    "
+                << currentDeallocCount
+                << std::endl;
+        }
+
+        // Multi-threading related.
+        {
+            std::cout
+                << "[THREADS USED]:     "
+                << ((thisMultiThreading) ? std::to_string(particleSystem.GetThreadCount()) : "1")
+                << std::endl;
+        }
+
+        // Extra-extra spacing.
+        std::cout << std::endl;
+        std::cout << std::endl;
     }
 }
 
 void MemoryAndCacheOptiAssignment::Render(sf::RenderWindow& window)
 {
-    particleSystem.render(wayOfStorage, window);
+    particleSystem.Render(window);
 }

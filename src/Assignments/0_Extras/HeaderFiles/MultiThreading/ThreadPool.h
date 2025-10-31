@@ -11,6 +11,11 @@
 
 #include "SafeQueue.h"
 
+
+// IMPORTANT: 
+// -> From "mtrebi" !!!
+
+
 class ThreadPool 
 {
 private:
@@ -120,5 +125,11 @@ public:
 
         // Return future from promise
         return task_ptr->get_future();
+    }
+
+    static ThreadPool& GetInstance() 
+    {
+        static ThreadPool instance(std::thread::hardware_concurrency());
+        return instance;
     }
 };

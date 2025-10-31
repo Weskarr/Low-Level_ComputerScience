@@ -1,0 +1,158 @@
+// SoA & Multi-threaded
+
+[GEN]:              1
+[SPEED]:            0.230ms
+[TIME]:             0.153s
+[FPS]:              10fps
+[PARTICLES]:        10000
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   351.79 KB    +351.79 KB
+[MEMORY PEAK]:      352.85 KB
+[ALLOC COUNT]:      133903    +133903
+[DEALLOC COUNT]:    133214    +133214
+[THREADS USED]:     12
+
+[GEN]:              40
+[SPEED]:            0.240ms
+[TIME]:             0.043s
+[FPS]:              20fps
+[PARTICLES]:        2713
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   352.89 KB    +1.10 KB
+[MEMORY PEAK]:      355.85 KB
+[ALLOC COUNT]:      2940044    +2806141
+[DEALLOC COUNT]:    2939347    +2806133
+[THREADS USED]:     12
+
+[GEN]:              88
+[SPEED]:            0.192ms
+[TIME]:             0.017s
+[FPS]:              48fps
+[PARTICLES]:        0
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   353.28 KB    +0.39 KB
+[MEMORY PEAK]:      356.24 KB
+[ALLOC COUNT]:      3542292    +602248
+[DEALLOC COUNT]:    3541593    +602246
+[THREADS USED]:     12
+
+
+
+
+// SoA & Single-threaded
+
+[GEN]:              1
+[SPEED]:            0.622ms
+[TIME]:             0.165s
+[FPS]:              10fps
+[PARTICLES]:        10000
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   348.52 KB    +348.52 KB
+[MEMORY PEAK]:      349.47 KB
+[ALLOC COUNT]:      7327781    +7327781
+[DEALLOC COUNT]:    7327123    +7327123
+[THREADS USED]:     1
+
+[GEN]:              40
+[SPEED]:            0.447ms
+[TIME]:             0.044s
+[FPS]:              21fps
+[PARTICLES]:        2836
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   348.72 KB    +0.20 KB
+[MEMORY PEAK]:      349.67 KB
+[ALLOC COUNT]:      10134678    +2806897
+[DEALLOC COUNT]:    10134016    +2806893
+[THREADS USED]:     1
+
+[GEN]:              90
+[SPEED]:            0.035ms
+[TIME]:             0.017s
+[FPS]:              48fps
+[PARTICLES]:        0
+[WAY OF STORAGE]:   SoA
+[MEMORY CURRENT]:   348.72 KB    +0.00 KB
+[MEMORY PEAK]:      349.67 KB
+[ALLOC COUNT]:      10778629    +643951
+[DEALLOC COUNT]:    10777967    +643951
+[THREADS USED]:     1
+
+
+
+
+// AoS & Multi-threaded
+
+[GEN]:              1
+[SPEED]:            1.855ms
+[TIME]:             0.166s
+[FPS]:              10fps
+[PARTICLES]:        10000
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   12149.78 KB    +12149.78 KB
+[MEMORY PEAK]:      12151.71 KB
+[ALLOC COUNT]:      4648475    +4648475
+[DEALLOC COUNT]:    4587774    +4587774
+[THREADS USED]:     12
+
+[GEN]:              40
+[SPEED]:            1.193ms
+[TIME]:             0.046s
+[FPS]:              21fps
+[PARTICLES]:        5606
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   6863.87 KB    -5285.91 KB
+[MEMORY PEAK]:      12153.17 KB
+[ALLOC COUNT]:      7262582    +2614107
+[DEALLOC COUNT]:    7228239    +2640465
+[THREADS USED]:     12
+
+[GEN]:              137
+[SPEED]:            2.009ms
+[TIME]:             0.018s
+[FPS]:              63fps
+[PARTICLES]:        0
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   119.41 KB    -6744.45 KB
+[MEMORY PEAK]:      12153.17 KB
+[ALLOC COUNT]:      9041504    +1778922
+[DEALLOC COUNT]:    9040796    +1812557
+[THREADS USED]:     12
+
+
+// AoS & Single-threaded
+
+[GEN]:              1
+[SPEED]:            6.499ms
+[TIME]:             0.169s
+[FPS]:              10fps
+[PARTICLES]:        10000
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   12145.17 KB    +12145.17 KB
+[MEMORY PEAK]:      12145.47 KB
+[ALLOC COUNT]:      8382063    +8382063
+[DEALLOC COUNT]:    8321411    +8321411
+[THREADS USED]:     1
+
+[GEN]:              40
+[SPEED]:            7.043ms
+[TIME]:             0.048s
+[FPS]:              21fps
+[PARTICLES]:        4929
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   6044.12 KB    -6101.05 KB
+[MEMORY PEAK]:      12145.47 KB
+[ALLOC COUNT]:      10896221    +2514158
+[DEALLOC COUNT]:    10865995    +2544584
+[THREADS USED]:     1
+
+[GEN]:              126
+[SPEED]:            1.164ms
+[TIME]:             0.017s
+[FPS]:              61fps
+[PARTICLES]:        0
+[WAY OF STORAGE]:   AoS
+[MEMORY CURRENT]:   113.92 KB    -5930.20 KB
+[MEMORY PEAK]:      12145.47 KB
+[ALLOC COUNT]:      12272657    +1376436
+[DEALLOC COUNT]:    12272005    +1406010
+[THREADS USED]:     1
